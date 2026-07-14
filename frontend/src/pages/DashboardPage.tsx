@@ -1,7 +1,18 @@
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
+import { getResults } from '../api/quiz'
+import type { QuizResultSummary } from '../api/quiz'
 
 export function DashboardPage() {
   const { user, logout } = useAuth()
+  const [results, setResults] = useState<QuizResultSummary[]>([])
+
+  useEffect(() => {
+    getResults()
+      .then((res) => setResults(res?.results ?? []))
+      .catch(() => setResults([]))
+  }, [])
 
   return (
     <main className="dashboard">
@@ -17,7 +28,9 @@ export function DashboardPage() {
         <article>
           <h3>Discover your fit</h3>
           <p>Take the personality test to find the jobs that suit you best.</p>
-          <p className="soon">Coming in Phase 2</p>
+          <Link className="cta" to="/test">
+            Take the test
+          </Link>
         </article>
         <article>
           <h3>Land the job</h3>
@@ -30,6 +43,22 @@ export function DashboardPage() {
           <p className="soon">Coming in Phase 4</p>
         </article>
       </section>
+
+      {results.length > 0 && (
+        <section className="history" aria-label="past results">
+          <h3>Your past results</h3>
+          <ul>
+            {results.map((r) => (
+              <li key={r.id}>
+                <Link to={`/results/${r.id}`}>
+                  {new Date(r.createdAt).toLocaleDateString()} - top match:{' '}
+                  {r.topMatch ? `${r.topMatch.title} (${r.topMatch.fit}% fit)` : 'view details'}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
   )
 }

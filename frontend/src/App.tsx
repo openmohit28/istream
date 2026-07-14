@@ -3,6 +3,8 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { DashboardPage } from './pages/DashboardPage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { ResultPage } from './pages/ResultPage'
+import { TestPage } from './pages/TestPage'
 
 function App() {
   return (
@@ -14,6 +16,22 @@ function App() {
         element={
           <ProtectedRoute>
             <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/test"
+        element={
+          <ProtectedRoute>
+            <TestPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/results/:id"
+        element={
+          <ProtectedRoute>
+            <ResultPage />
           </ProtectedRoute>
         }
       />

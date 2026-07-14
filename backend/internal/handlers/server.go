@@ -11,14 +11,16 @@ import (
 )
 
 type Server struct {
-	cfg   config.Config
-	users *store.Users
+	cfg     config.Config
+	users   *store.Users
+	results *store.Results
 }
 
 func NewServer(db *sql.DB, cfg config.Config) http.Handler {
 	s := &Server{
-		cfg:   cfg,
-		users: &store.Users{DB: db},
+		cfg:     cfg,
+		users:   &store.Users{DB: db},
+		results: &store.Results{DB: db},
 	}
 
 	gin.SetMode(gin.ReleaseMode)
@@ -32,6 +34,12 @@ func NewServer(db *sql.DB, cfg config.Config) http.Handler {
 	authRoutes.POST("/register", s.handleRegister)
 	authRoutes.POST("/login", s.handleLogin)
 	authRoutes.GET("/me", s.requireAuth(), s.handleMe)
+
+	quizRoutes := api.Group("/quiz", s.requireAuth())
+	quizRoutes.GET("/questions", s.handleQuizQuestions)
+	quizRoutes.POST("/submit", s.handleQuizSubmit)
+	quizRoutes.GET("/results", s.handleQuizResults)
+	quizRoutes.GET("/results/:id", s.handleQuizResult)
 
 	return r
 }

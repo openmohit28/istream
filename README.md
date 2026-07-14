@@ -38,20 +38,34 @@ cd backend && go test ./...    # uses istream_test (TEST_DATABASE_URL to overrid
 cd frontend && npm test        # Vitest + Testing Library
 ```
 
-## API (Phase 1)
+## API
 
-| Method | Path               | Auth   | Description                          |
-|--------|--------------------|--------|--------------------------------------|
-| GET    | /api/health        | none   | Liveness check                       |
-| POST   | /api/auth/register | none   | Create account → `{token, user}`     |
-| POST   | /api/auth/login    | none   | Log in → `{token, user}`             |
-| GET    | /api/auth/me       | Bearer | Current user                         |
+| Method | Path                   | Auth   | Description                          |
+|--------|------------------------|--------|--------------------------------------|
+| GET    | /api/health            | none   | Liveness check                       |
+| POST   | /api/auth/register     | none   | Create account → `{token, user}`     |
+| POST   | /api/auth/login        | none   | Log in → `{token, user}`             |
+| GET    | /api/auth/me           | Bearer | Current user                         |
+| GET    | /api/quiz/questions    | Bearer | 24-question RIASEC bank + scale      |
+| POST   | /api/quiz/submit       | Bearer | Score answers → `{id, scores, matches}` |
+| GET    | /api/quiz/results      | Bearer | Past results (summaries)             |
+| GET    | /api/quiz/results/:id  | Bearer | One result (owner-scoped)            |
+
+## How matching works (Phase 2)
+
+The test measures the six RIASEC dimensions (Holland Codes) with 24 Likert
+questions. Each catalog job carries a 3-letter Holland code plus demand
+outlook and AI-risk level sourced from 2026 labor research (WEF Future of
+Jobs, PwC AI Jobs Barometer, Guardian AI-safe careers). Fit = cosine
+similarity between the user's profile and the job vector; ranking adds a
+small boost for growing fields. Results are snapshotted per user in
+`test_results`.
 
 ## Roadmap
 
 - **Phase 1 — done**: scaffold, register/login, JWT-protected user data, tests
-- **Phase 2**: personality test engine → scored job-fit results (weighted with
-  2026 in-demand jobs research)
+- **Phase 2 — done**: RIASEC personality test → scored job-fit results
+  (weighted with 2026 in-demand jobs research), per-user history
 - **Phase 3**: job search (LinkedIn URL builder) + guided Q&A → customized
   ATS-safe resume
 - **Phase 4**: career pivot module — question tree with forkable threads

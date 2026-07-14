@@ -38,7 +38,7 @@ func TestMain(m *testing.M) {
 
 func newTestServer(t *testing.T) http.Handler {
 	t.Helper()
-	if _, err := testDB.Exec(`TRUNCATE users`); err != nil {
+	if _, err := testDB.Exec(`TRUNCATE users CASCADE`); err != nil {
 		t.Fatalf("truncate users: %v", err)
 	}
 	cfg := config.Config{

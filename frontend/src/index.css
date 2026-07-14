@@ -639,6 +639,128 @@ button.remove {
   margin: 0 2px;
 }
 
+/* Pivot module */
+.pivot-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.pivot-page header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cta-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+}
+
+.fork-note {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.pivot-trail ol {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pivot-trail li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.fork-btn {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  font-size: 12px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.pivot-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pivot-outcome {
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 16px;
+}
+
+.outcome-path {
+  color: var(--accent);
+  border-color: var(--accent);
+  text-transform: capitalize;
+}
+
+.pivot-outcome .tagline {
+  font-size: 17px;
+  color: var(--text-h);
+}
+
+.why-now {
+  background: var(--accent-bg);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.plan li {
+  margin-bottom: 6px;
+}
+
+.resources {
+  padding-left: 18px;
+}
+
+.resources a {
+  color: var(--accent);
+}
+
+.thread-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thread-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.thread-list .meta {
+  font-size: 13px;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media print {
   .no-print {
     display: none !important;

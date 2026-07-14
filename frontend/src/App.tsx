@@ -4,6 +4,8 @@ import { DashboardPage } from './pages/DashboardPage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { JobSearchPage } from './pages/JobSearchPage'
+import { PivotListPage } from './pages/PivotListPage'
+import { PivotThreadPage } from './pages/PivotThreadPage'
 import { ResultPage } from './pages/ResultPage'
 import { ResumeBuilderPage } from './pages/ResumeBuilderPage'
 import { ResumeListPage } from './pages/ResumeListPage'
@@ -76,6 +78,22 @@ function App() {
         element={
           <ProtectedRoute>
             <ResumePreviewPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/pivot"
+        element={
+          <ProtectedRoute>
+            <PivotListPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/pivot/:id"
+        element={
+          <ProtectedRoute>
+            <PivotThreadPage />
           </ProtectedRoute>
         }
       />

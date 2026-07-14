@@ -15,6 +15,7 @@ type Server struct {
 	users   *store.Users
 	results *store.Results
 	resumes *store.Resumes
+	pivots  *store.Pivots
 }
 
 func NewServer(db *sql.DB, cfg config.Config) http.Handler {
@@ -23,6 +24,7 @@ func NewServer(db *sql.DB, cfg config.Config) http.Handler {
 		users:   &store.Users{DB: db},
 		results: &store.Results{DB: db},
 		resumes: &store.Resumes{DB: db},
+		pivots:  &store.Pivots{DB: db},
 	}
 
 	gin.SetMode(gin.ReleaseMode)
@@ -53,6 +55,14 @@ func NewServer(db *sql.DB, cfg config.Config) http.Handler {
 	resumeRoutes.PUT("/:id", s.handleResumeUpdate)
 	resumeRoutes.DELETE("/:id", s.handleResumeDelete)
 	resumeRoutes.POST("/:id/keyword-check", s.handleResumeKeywordCheck)
+
+	pivotRoutes := api.Group("/pivot", s.requireAuth())
+	pivotRoutes.POST("/threads", s.handlePivotThreadCreate)
+	pivotRoutes.GET("/threads", s.handlePivotThreadList)
+	pivotRoutes.GET("/threads/:id", s.handlePivotThreadGet)
+	pivotRoutes.PUT("/threads/:id", s.handlePivotThreadUpdate)
+	pivotRoutes.POST("/threads/:id/fork", s.handlePivotThreadFork)
+	pivotRoutes.DELETE("/threads/:id", s.handlePivotThreadDelete)
 
 	return r
 }

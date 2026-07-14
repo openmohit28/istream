@@ -47,7 +47,11 @@ export function DashboardPage() {
         <article>
           <h3>Pivot your career</h3>
           <p>Switch fields, reduce hours, or move to consulting with a guided plan.</p>
-          <p className="soon">Coming in Phase 4</p>
+          <p className="card-links">
+            <Link className="cta" to="/pivot">
+              Explore your pivot
+            </Link>
+          </p>
         </article>
       </section>
 

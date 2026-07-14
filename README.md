@@ -57,6 +57,12 @@ cd frontend && npm test        # Vitest + Testing Library
 | PUT    | /api/resumes/:id       | Bearer | Update resume                        |
 | DELETE | /api/resumes/:id       | Bearer | Delete resume                        |
 | POST   | /api/resumes/:id/keyword-check | Bearer | Score resume vs job description (ATS) |
+| POST   | /api/pivot/threads     | Bearer | Start a pivot exploration            |
+| GET    | /api/pivot/threads     | Bearer | List explorations (with state)       |
+| GET    | /api/pivot/threads/:id | Bearer | One exploration (owner-scoped)       |
+| PUT    | /api/pivot/threads/:id | Bearer | Submit answers (server-validated walk) |
+| POST   | /api/pivot/threads/:id/fork | Bearer | Fork at an earlier answer into a new thread |
+| DELETE | /api/pivot/threads/:id | Bearer | Delete an exploration                |
 
 ## How matching works (Phase 2)
 
@@ -78,6 +84,18 @@ The keyword check tokenizes a pasted job description, filters stopwords and
 posting boilerplate, and reports matched/missing terms with a coverage score -
 because 64% of ATS setups auto-reject poor keyword matches (Jobscan, 2026).
 
+## Career pivot (Phase 4)
+
+A versioned decision tree guides people already in a job from "something
+needs to change" to one of ten research-grounded outcomes across five paths:
+reduce hours, within-field, switch out, consultancy, and recharge. Each
+outcome carries a why-now (cited to 2026 research), a 5-step action plan,
+and curated resources (external links plus in-app tie-ins to the test, job
+search, and resume builder). Explorations are persisted threads; any earlier
+answer can be **forked** into a new thread so several directions can be
+explored side by side without losing the original. The server re-walks every
+submitted path against the tree, so stored threads can never desync from it.
+
 ## Roadmap
 
 - **Phase 1 — done**: scaffold, register/login, JWT-protected user data, tests
@@ -85,7 +103,8 @@ because 64% of ATS setups auto-reject poor keyword matches (Jobscan, 2026).
   (weighted with 2026 in-demand jobs research), per-user history
 - **Phase 3 — done**: LinkedIn job-search URL builder + guided resume wizard
   → ATS-safe resume with keyword coverage check
-- **Phase 4**: career pivot module — question tree with forkable threads
-  (switch out / reduce hours / change within field / consultancy) + resources
+- **Phase 4 — done**: career pivot module — decision tree with forkable
+  threads (reduce hours / within field / switch out / consultancy) + plans
+  and resources
 - **Phase 5**: trends layer — 2026-2030 demand data baked into recommendations,
   end-to-end tests

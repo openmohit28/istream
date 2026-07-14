@@ -14,6 +14,7 @@ type Server struct {
 	cfg     config.Config
 	users   *store.Users
 	results *store.Results
+	resumes *store.Resumes
 }
 
 func NewServer(db *sql.DB, cfg config.Config) http.Handler {
@@ -21,6 +22,7 @@ func NewServer(db *sql.DB, cfg config.Config) http.Handler {
 		cfg:     cfg,
 		users:   &store.Users{DB: db},
 		results: &store.Results{DB: db},
+		resumes: &store.Resumes{DB: db},
 	}
 
 	gin.SetMode(gin.ReleaseMode)
@@ -40,6 +42,17 @@ func NewServer(db *sql.DB, cfg config.Config) http.Handler {
 	quizRoutes.POST("/submit", s.handleQuizSubmit)
 	quizRoutes.GET("/results", s.handleQuizResults)
 	quizRoutes.GET("/results/:id", s.handleQuizResult)
+
+	jobRoutes := api.Group("/jobs", s.requireAuth())
+	jobRoutes.GET("/search-url", s.handleJobSearchURL)
+
+	resumeRoutes := api.Group("/resumes", s.requireAuth())
+	resumeRoutes.POST("", s.handleResumeCreate)
+	resumeRoutes.GET("", s.handleResumeList)
+	resumeRoutes.GET("/:id", s.handleResumeGet)
+	resumeRoutes.PUT("/:id", s.handleResumeUpdate)
+	resumeRoutes.DELETE("/:id", s.handleResumeDelete)
+	resumeRoutes.POST("/:id/keyword-check", s.handleResumeKeywordCheck)
 
 	return r
 }

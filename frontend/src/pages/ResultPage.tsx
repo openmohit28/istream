@@ -81,6 +81,9 @@ export function ResultPage() {
                 <span className="badge category">{m.category}</span>
               </p>
               <p>{m.blurb}</p>
+              <Link className="search-link" to="/jobs" state={{ keywords: m.title }}>
+                Search openings for this role
+              </Link>
             </li>
           ))}
         </ol>

@@ -50,6 +50,13 @@ cd frontend && npm test        # Vitest + Testing Library
 | POST   | /api/quiz/submit       | Bearer | Score answers → `{id, scores, matches}` |
 | GET    | /api/quiz/results      | Bearer | Past results (summaries)             |
 | GET    | /api/quiz/results/:id  | Bearer | One result (owner-scoped)            |
+| GET    | /api/jobs/search-url   | Bearer | Filters → pre-filtered LinkedIn jobs URL |
+| POST   | /api/resumes           | Bearer | Create resume (structured document)  |
+| GET    | /api/resumes           | Bearer | List resumes (summaries)             |
+| GET    | /api/resumes/:id       | Bearer | One resume (owner-scoped)            |
+| PUT    | /api/resumes/:id       | Bearer | Update resume                        |
+| DELETE | /api/resumes/:id       | Bearer | Delete resume                        |
+| POST   | /api/resumes/:id/keyword-check | Bearer | Score resume vs job description (ATS) |
 
 ## How matching works (Phase 2)
 
@@ -61,13 +68,23 @@ similarity between the user's profile and the job vector; ranking adds a
 small boost for growing fields. Results are snapshotted per user in
 `test_results`.
 
+## Job search & resumes (Phase 3)
+
+Job search generates pre-filtered LinkedIn deep links (keywords, location,
+remote/hybrid, experience, job type, recency) - no scraping, no ToS risk.
+The resume builder is a 7-step guided wizard producing a structured document
+rendered as a single-column ATS-safe sheet (print to PDF from the browser).
+The keyword check tokenizes a pasted job description, filters stopwords and
+posting boilerplate, and reports matched/missing terms with a coverage score -
+because 64% of ATS setups auto-reject poor keyword matches (Jobscan, 2026).
+
 ## Roadmap
 
 - **Phase 1 — done**: scaffold, register/login, JWT-protected user data, tests
 - **Phase 2 — done**: RIASEC personality test → scored job-fit results
   (weighted with 2026 in-demand jobs research), per-user history
-- **Phase 3**: job search (LinkedIn URL builder) + guided Q&A → customized
-  ATS-safe resume
+- **Phase 3 — done**: LinkedIn job-search URL builder + guided resume wizard
+  → ATS-safe resume with keyword coverage check
 - **Phase 4**: career pivot module — question tree with forkable threads
   (switch out / reduce hours / change within field / consultancy) + resources
 - **Phase 5**: trends layer — 2026-2030 demand data baked into recommendations,

@@ -359,3 +359,298 @@ button:disabled {
   color: var(--error);
   border-color: var(--error);
 }
+
+.search-link {
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* Jobs + resumes pages */
+.jobs-page,
+.builder-page,
+.resumes-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.jobs-page header,
+.builder-page header,
+.resumes-page header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jobs-page form {
+  margin-top: 16px;
+}
+
+.search-result {
+  margin-top: 16px;
+}
+
+select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-h);
+}
+
+.cta.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.card-links {
+  display: flex;
+  gap: 8px;
+}
+
+/* Resume wizard */
+.steps {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.steps li {
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+}
+
+.steps li.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.steps li.done {
+  opacity: 0.6;
+}
+
+.step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.step-body fieldset {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-h);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row label {
+  flex: 1;
+}
+
+.checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+button.remove {
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--error);
+  align-self: flex-start;
+}
+
+.review {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Resume list */
+.resume-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resume-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.resume-list .meta {
+  font-size: 13px;
+  flex: 1;
+}
+
+.resume-list .actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Resume preview (ATS sheet) */
+.preview-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.preview-page header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview-page header nav {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.resume-sheet {
+  background: #fff;
+  color: #111;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 36px 42px;
+  margin-top: 16px;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.45;
+}
+
+.resume-sheet h2.resume-name {
+  color: #111;
+  font-size: 26px;
+  margin: 0;
+}
+
+.resume-target {
+  font-size: 15px;
+  margin: 2px 0 4px;
+  color: #333;
+}
+
+.resume-contact {
+  font-size: 13px;
+  color: #444;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.resume-sheet h3 {
+  color: #111;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2px;
+  margin: 18px 0 6px;
+}
+
+.resume-sheet p,
+.resume-sheet li {
+  font-size: 14px;
+  color: #222;
+}
+
+.resume-entry {
+  margin-bottom: 10px;
+}
+
+.entry-head {
+  margin: 0;
+}
+
+.entry-dates {
+  margin: 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.resume-sheet ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+/* Keyword panel */
+.keyword-panel {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.keyword-panel button {
+  align-self: flex-start;
+}
+
+.keyword-report .score {
+  font-size: 16px;
+}
+
+.report-label {
+  font-weight: 600;
+}
+
+.badge.matched {
+  color: #1e8e3e;
+  border-color: #1e8e3e;
+  margin: 0 2px;
+}
+
+.badge.missing {
+  color: var(--error);
+  border-color: var(--error);
+  margin: 0 2px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .preview-page {
+    padding: 0;
+    max-width: none;
+  }
+  .resume-sheet {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+  }
+}

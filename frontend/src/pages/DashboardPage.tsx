@@ -35,7 +35,14 @@ export function DashboardPage() {
         <article>
           <h3>Land the job</h3>
           <p>Search openings and build a resume customized for each role.</p>
-          <p className="soon">Coming in Phase 3</p>
+          <p className="card-links">
+            <Link className="cta" to="/jobs">
+              Search jobs
+            </Link>{' '}
+            <Link className="cta secondary" to="/resumes">
+              My resumes
+            </Link>
+          </p>
         </article>
         <article>
           <h3>Pivot your career</h3>

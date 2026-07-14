@@ -3,7 +3,11 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { DashboardPage } from './pages/DashboardPage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { JobSearchPage } from './pages/JobSearchPage'
 import { ResultPage } from './pages/ResultPage'
+import { ResumeBuilderPage } from './pages/ResumeBuilderPage'
+import { ResumeListPage } from './pages/ResumeListPage'
+import { ResumePreviewPage } from './pages/ResumePreviewPage'
 import { TestPage } from './pages/TestPage'
 
 function App() {
@@ -32,6 +36,46 @@ function App() {
         element={
           <ProtectedRoute>
             <ResultPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/jobs"
+        element={
+          <ProtectedRoute>
+            <JobSearchPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/resumes"
+        element={
+          <ProtectedRoute>
+            <ResumeListPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/resumes/new"
+        element={
+          <ProtectedRoute>
+            <ResumeBuilderPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/resumes/:id/edit"
+        element={
+          <ProtectedRoute>
+            <ResumeBuilderPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/resumes/:id"
+        element={
+          <ProtectedRoute>
+            <ResumePreviewPage />
           </ProtectedRoute>
         }
       />
